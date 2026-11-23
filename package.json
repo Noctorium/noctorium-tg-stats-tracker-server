@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "node --test --experimental-strip-types test/*.test.ts",
-    "setup": "node scripts/setup.mjs"
+    "test": "node --test --experimental-strip-types test/*.test.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",

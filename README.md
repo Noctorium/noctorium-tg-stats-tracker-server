@@ -22,7 +22,7 @@ Vercel project `noctorium-tg-stats`. Environment:
 | `DATABASE_URL` | The Noctorium database (Neon), shared with the account server |
 | `RPC_SECRET` | The same as the stats service's |
 
-After the first deploy, `npm run setup` with the token and webhook secret set points the bot at the webhook and sets
-its commands and menu button. Turn on inline mode with `/setinline` in @BotFather.
+After a deploy, `curl -X POST https://tgstats.noctorium.xyz/api/setup` points the bot at the webhook and sets its
+commands and menu button. Turn on inline mode with `/setinline` in @BotFather.
 
 `npm test` checks the initData signature, the commands and the messages.
