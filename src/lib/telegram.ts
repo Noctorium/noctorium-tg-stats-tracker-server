@@ -3,18 +3,21 @@ import { createHmac, timingSafeEqual } from "node:crypto"
 /** Telegram's Bot API, and the two ways Telegram proves a request is really from it. */
 
 function token(): string {
-  const value = process.env.TELEGRAM_BOT_TOKEN
+  // Trimmed: a token pasted into Vercel easily brings a space or line break with it.
+  const value = process.env.TELEGRAM_BOT_TOKEN?.trim()
   if (!value) throw new Error("TELEGRAM_BOT_TOKEN is not set (the stats bot's token from @BotFather).")
   return value
 }
 
 /** One Bot API call. Throws with Telegram's own description when it says no. */
-export async function bot(method: string, params: Record<string, unknown>): Promise<unknown> {
+export async function bot(method: string, params: Record<string, unknown>, seconds = 15): Promise<unknown> {
   const reply = await fetch(`https://api.telegram.org/bot${token()}/${method}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(params),
-    signal: AbortSignal.timeout(15_000),
+    signal: AbortSignal.timeout(seconds * 1000),
+  }).catch((error: Error) => {
+    throw new Error(`Telegram ${method}: ${error.message}`)
   })
   const body = (await reply.json().catch(() => ({}))) as { ok?: boolean; result?: unknown; description?: string }
   if (!body.ok) throw new Error(`Telegram ${method}: ${body.description ?? reply.status}`)
