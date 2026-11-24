@@ -24,7 +24,7 @@ export type Stats = {
   recent: { title: string; artist: string; playedAt: string }[]
   streak: { current: number; longest: number }
 }
-export type Listening = { stats: Stats; nowPlaying: Track | null }
+export type Listening = { stats: Stats; nowPlaying: Track | null; name?: string | null; avatarUrl?: string | null }
 
 let connection: NeonQueryFunction<false, false> | null = null
 function db(): NeonQueryFunction<false, false> {

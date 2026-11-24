@@ -19,6 +19,8 @@ const css = `
 body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 Inter, system-ui, -apple-system, sans-serif; }
 main { max-width: 560px; margin: 0 auto; padding: 16px; }
 h1 { font-size: 22px; margin: 4px 0 12px; letter-spacing: -0.01em; }
+h1.who { display: flex; align-items: center; gap: 10px; }
+.avatar { display: inline-grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--card); color: var(--accent); font-size: 16px; }
 h2 { font-size: 15px; margin: 20px 0 8px; }
 p, .muted { color: var(--muted); }
 a { color: var(--link); }

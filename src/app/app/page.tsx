@@ -59,7 +59,15 @@ export default function MiniApp() {
   const s = data?.stats
   return (
     <main>
-      <h1>Noctorium Stats</h1>
+      <h1 className="who">
+        {data?.avatarUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="avatar" src={data.avatarUrl} width={36} height={36} alt="" />
+        ) : data?.name ? (
+          <span className="avatar" aria-hidden>{(data.name.trim()[0] ?? "?").toUpperCase()}</span>
+        ) : null}
+        {data?.name ?? "Noctorium Stats"}
+      </h1>
       <div className="tabs" role="group" aria-label="Time range">
         {RANGES.map(([value, label]) => (
           <button key={value} aria-pressed={value === range} onClick={() => setRange(value)}>{label}</button>
